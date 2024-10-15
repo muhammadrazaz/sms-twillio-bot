@@ -5,7 +5,7 @@ import BasePage from './Pages/BasePage/BasePage';
 function App() {
   return (
 
-     <BasePage></BasePage>
+     <Dashboard></Dashboard>
 
   );
 }

@@ -1,7 +1,12 @@
 import React, { useState } from 'react'
 import './BasePage.css'
 import SideBar from '../../Components/SideBar/SideBar'
-export default function BasePage() {
+import TopBar from '../../Components/TopBar/TopBar';
+
+
+export default function BasePage({children}) {
+
+
     const [isChecked, setIsChecked] = useState(false);
     const sidebarRef = useState(null)
     const handleSideBarMouseEnter = () => {
@@ -39,10 +44,11 @@ export default function BasePage() {
 
         <div id="right-side-container">
             <div id="top-bar-container">
-                top bar
+                <TopBar/>
             </div>
-            <div id="content-container">
-                this content
+            <div id="content-container" className='p-4'>
+                {children}
+         
             </div>
         </div>
 

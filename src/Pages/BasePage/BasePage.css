@@ -9,6 +9,7 @@
     display: flex;
     width: 100%;
     min-height: 100vh;
+    
 }
 
 #side-bar-container{
@@ -42,4 +43,5 @@
 
 #content-container{
     /* background-color: rgb(235, 235, 229); */
+    background-color:#e7e7e7;
 }

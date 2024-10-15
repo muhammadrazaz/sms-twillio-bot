@@ -1,0 +1,67 @@
+.table-with-pagination table {
+    border-collapse: collapse;
+    border-radius: 5px;
+    border-style: hidden;
+    box-shadow: 0 0 0 1px #e4e3e3;
+
+}
+
+
+
+
+
+
+
+.table-with-pagination table thead th {
+    font-size: 14px;
+    font-family: "Noto Sans" !important;
+    text-transform: capitalize;
+    background-color: rgb(250, 250, 250) !important;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.table-with-pagination td {
+    text-transform: capitalize;
+    color: #6F6F6F;
+    text-align: start;
+    white-space: nowrap;
+}
+
+.table-with-pagination tr {
+    text-align-last: start !important;
+    border: 1px solid #e4e5e7;
+    
+
+}
+
+
+.table-with-pagination td, .table-with-pagination th {
+    padding: 12px !important;
+
+
+}
+
+
+.table-with-pagination table td,
+.table-with-pagination table th {
+    font-size: 14px;
+    vertical-align: middle !important;
+    border: none !important;
+}
+
+.table-with-pagination tbody tr{
+    border-top: 1px solid rgb(218, 219, 221);
+}
+
+
+
+
+
+
+
+
+
+
+
+
