@@ -39,14 +39,17 @@ export default function SideBar(props) {
 
             </div>
             <div className='mt-3'>
-                <div className="side-bar-option p-1">
 
-
-                    <span className='p-1'>
-                        <i className="ti ti-layout-2"></i>
+                <div className="side-bar-option p-2 active">
+                    <span className='p-1 option-icon'>
+                        <i className="ti ti-layout-2 "></i>
                     </span>
-
+                    <span className='option-text noto-sans-font regular-font'>
+                        Dashboard
+                    </span>
                 </div>
+
+
             </div>
         </div>
     )

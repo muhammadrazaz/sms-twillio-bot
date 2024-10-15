@@ -30,3 +30,32 @@
     color: #E41F07;
     cursor: pointer;
 }
+.side-bar-option .option-icon{
+
+        color: #262A2A;
+        font-size: 16px;
+        background: #d8d8d8;
+        border-radius: 5px;
+        /* width: 26px;
+        height: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: center; */
+    }
+
+.option-text{
+    margin-left: 10px;
+}
+.side-bar-option:hover  .option-text{
+    color: #E41F07;
+}
+
+.active{
+    background-color: #fcd4cd;
+    border-radius: 5px;
+}
+
+.active .option-icon{
+    background-color: #f04933;
+    color: white;
+}
