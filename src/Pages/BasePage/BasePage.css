@@ -1,0 +1,45 @@
+:root{
+    --sidebar-width : 245px;
+    --primary-background-color : rgb(249, 249, 252);
+    --top-bar-height: 56px
+
+}
+#base-page{
+    /* background-color: red; */
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+}
+
+#side-bar-container{
+    width: var(--sidebar-width);
+    padding: 0 15px;
+    height: 100vh;
+    transition: all 1s ease;
+    background-color: var(--primary-background-color);
+    z-index: 2;
+    
+
+}
+#side-bar-container:hover{
+    position: absolute;
+
+}
+
+
+#right-side-container{
+    width: calc(100% - var(--sidebar-width));
+    transition: all 1s ease;
+    left: var(--sidebar-width);
+    position: absolute;
+}
+
+#top-bar-container{
+    height: var(--top-bar-height);
+    width: 100%;
+    background-color: var(--primary-background-color);
+}
+
+#content-container{
+    /* background-color: rgb(235, 235, 229); */
+}

@@ -1,0 +1,32 @@
+:root{
+    --side-bar-arrow-opacity :1;
+    --side-bar-arrow-degree :0deg
+}
+
+#side-bar{
+    /* background-color: red; */
+    width: 100%;
+    height: 100%;
+}
+
+#logo-container{
+    height: var(--top-bar-height);
+
+}
+
+#toggle-side-bar-div  .ti-arrow-bar-to-left{
+    font-size: 18px;
+}
+
+
+#toggle-side-bar + label{
+    transform: rotate(var(--side-bar-arrow-degree));
+    opacity: var(--side-bar-arrow-opacity);
+    transition: all 0.5s ease;
+    
+}
+/* #E41F07 */
+#toggle-side-bar-label:hover{
+    color: #E41F07;
+    cursor: pointer;
+}
