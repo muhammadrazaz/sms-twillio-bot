@@ -19,13 +19,15 @@
     transition: all 1s ease;
     background-color: var(--primary-background-color);
     z-index: 2;
-    
+    position: fixed;
 
 }
 #side-bar-container:hover{
-    position: absolute;
+    position: fixed;
 
 }
+
+
 
 
 #right-side-container{
@@ -43,5 +45,6 @@
 
 #content-container{
     /* background-color: rgb(235, 235, 229); */
-    background-color:#e7e7e7;
+    /* background-color:#e7e7e7; */
 }
+

@@ -1,0 +1,138 @@
+.filter-comp{
+    position: relative;
+}
+.filter-comp .filter-checkbox-label {
+    padding: 9px 15px;
+    border: 1px solid #E8E8E8;
+    border-radius: 5px;
+    width: fit-content;
+    /* position: relative; */
+    
+}
+.filter-comp label{
+    cursor: pointer;
+}
+
+.filter-comp .filter-checkbox-label i {
+    font-size: 14px;
+}
+
+.filter-comp .filter-checkbox-label .drop-icon {
+    transition: all 1s ease;
+}
+
+.filter-comp input[id="filter-checkbox"]:checked+.filter-checkbox-label .drop-icon {
+    transform: rotate(180deg);
+}
+
+.filter-comp .filter-option {
+    /* min-width: 170px; */
+    width: 360px;
+    /* width: fit-content; */
+    padding: 15px;
+    background: #FFF;
+    box-shadow: 0 5px 10px rgba(30, 32, 37, 0.12);
+    border: 1px solid #E8E8E8;
+    position: absolute;
+    inset: 0px 0px auto auto;
+    margin: 0px;
+    transform: translate(0px, 45px);
+    z-index: 2;
+    border-radius: 5px;
+    display: none;
+}
+
+.filter-comp input[id="filter-checkbox"]:checked+label +.filter-option {
+    display: block;
+}
+
+.filter-comp .filter-option .option {
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+
+}
+
+.filter-comp .filter-option .option:hover {
+    background-color: #E8E8E8;
+}
+
+
+input[name="filter-option-selection"]+label {
+    cursor: pointer;
+}
+
+input[name="filter-option-selection"]+label i {
+    transition: all 1s ease;
+}
+
+input[name="filter-option-selection"]:checked+label i {
+    transform: rotate(90deg);
+
+}
+
+
+input[name="filter-option-selection"]+label+.sub-options {
+    height: 0;
+    overflow: hidden;
+    transition: all 1s ease;
+    border-radius: 5px;
+    background-color: #F9F9FC;
+}
+
+
+input[name="filter-option-selection"]:checked+label+.sub-options {
+    height: 200px;
+    margin-top: 15px;
+    padding: 15px;
+    overflow-y: auto;
+
+}
+
+
+input[name="filter-option-selection"]:checked+label+.sub-options::-webkit-scrollbar {
+    width: 3px;
+    /* Width of the scrollbar */
+}
+
+input[name="filter-option-selection"]:checked+label+.sub-options::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* Track color */
+}
+
+input[name="filter-option-selection"]:checked+label+.sub-options::-webkit-scrollbar-thumb {
+    background-color: red;
+    /* Scrollbar thumb color */
+
+
+}
+
+input[name="filter-option-selection"]:checked+label+.sub-options::-webkit-scrollbar-thumb:hover {
+    background-color: red;
+    /* Color when hovered */
+}
+
+
+input[name="filter-option-selection"]+label+.sub-options input {
+    border: 1px solid rgb(232, 232, 232);
+    border-radius: 5px;
+    opacity: 0.25;
+}
+input[name="filter-option-selection"]+label+.sub-options input:checked{
+    opacity: 1;
+}
+
+input[name="filter-option-selection"]+label+.sub-options .option-checkbox {
+    color: rgb(111, 111, 111);
+}
+
+.filter-action-btn button{
+    padding: 6px 10px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.filter-action-btn .filter-btn{
+    background-color: #E64B16;
+    color: white;
+}

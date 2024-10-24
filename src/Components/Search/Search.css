@@ -1,0 +1,21 @@
+.search-div{
+    width:400px;
+    max-width:100%;
+    position: relative;
+}
+.search-div input{
+    padding: 8px 15px 8px 35px;
+    height:42px;
+    box-shadow: none !important;
+}
+.search-div input:focus{
+    border: 1px solid #ced4da;
+}
+
+.search-div i {
+    position: absolute;
+    top :50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    left: 15px;
+}

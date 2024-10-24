@@ -1,0 +1,76 @@
+.multi-select-div{
+    /* height: 42px; */
+    background-color: white;
+    position: relative;
+    display: flex;
+    
+}
+/* .multi-select-div .selected-option-div{
+    white-space: nowrap;
+    overflow-x: auto;
+    background-color: red;
+    overflow-y: hidden;
+} */
+
+.multi-select-div .multi-select-optios{
+    position: absolute;
+    inset: 0px auto auto auto;
+    transform: translate(-14px,45px);
+    width: 100%;
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    display: none;
+    height: 150px;
+
+}
+
+input[name="multi-select-checkbox"]:checked + div + .multi-select-optios{
+    border: 1px solid #E8E8E8;
+    z-index: 10;
+    display: block;
+    overflow-y: auto;
+}
+
+.multi-select-div .multi-select-optios .option{
+    padding: 5px 0px;
+}
+
+.multi-select-div .selected-options{
+    overflow-x: auto;
+    padding-bottom: 2px;
+}
+
+
+.multi-select-div .selected-options::-webkit-scrollbar {
+    height: 2px;
+    /* Width of the scrollbar */
+}
+
+.multi-select-div .selected-options::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* Track color */
+}
+
+.multi-select-div .selected-options::-webkit-scrollbar-thumb {
+    background-color: red;
+    /* Scrollbar thumb color */
+
+
+}
+
+.multi-select-div .selected-options::-webkit-scrollbar-thumb:hover {
+    background-color: red;
+    /* Color when hovered */
+}
+
+.multi-select-div .selected-option{
+    border-radius: 5px;
+    background-color: #EEEEF1;
+    padding: 1px 8px;
+    
+}
+
+.multi-select-div .selected-option i:hover{
+    cursor: pointer;
+}

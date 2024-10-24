@@ -1,17 +1,18 @@
-.table-with-pagination table {
-    border-collapse: collapse;
-    border-radius: 5px;
-    border-style: hidden;
-    box-shadow: 0 0 0 1px #e4e3e3;
-
+.table-with-pagination .dataTables_wrapper {
+    overflow: auto;
 }
 
 
+.table-with-pagination table {
+    border-collapse: collapse;
+    border-radius: 5px;
+    /* border-style: hidden; */
+    box-shadow: 0 0 0 1px #e4e3e3;
 
-
-
-
-
+}
+.table-with-pagination .sorting_desc::before , .table-with-pagination .sorting_asc::before,.table-with-pagination .sorting_desc::after , .table-with-pagination .sorting_asc::after{
+    display: none;
+}
 .table-with-pagination table thead th {
     font-size: 14px;
     font-family: "Noto Sans" !important;
@@ -53,6 +54,7 @@
 .table-with-pagination tbody tr{
     border-top: 1px solid rgb(218, 219, 221);
 }
+
 
 
 

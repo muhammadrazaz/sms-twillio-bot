@@ -1,0 +1,48 @@
+.sort-checkbox label{
+    padding: 9px 15px;
+    border: 1px solid #E8E8E8;
+    border-radius: 5px;
+    width: fit-content;
+    position: relative;
+    cursor: pointer;
+}
+
+.sort-checkbox label i{
+    font-size: 14px;
+}
+.sort-checkbox label .drop-icon{
+    transition: all 1s ease;
+}
+
+.sort-checkbox input[id="sort-checkbox"]:checked + label  .drop-icon{
+    transform: rotate(180deg);
+}
+
+.sort-checkbox .sort-option{
+    /* min-width: 170px; */
+    width: fit-content;
+    padding: 10px;
+    background: #FFF;
+    box-shadow: 0 5px 10px rgba(30, 32, 37, 0.12);
+    border: 1px solid #E8E8E8;
+    position: absolute;
+    inset: 0px 0px  auto;
+    margin: 0px;
+    transform: translate(0px, 45px);
+    z-index: 2;
+    border-radius: 5px;
+    display: none;
+}
+.sort-checkbox input[id="sort-checkbox"]:checked + label .sort-option{
+    display: block;
+}
+.sort-checkbox .sort-option .option{
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+   background-color: transparent;
+}
+.sort-checkbox .sort-option .option:hover,.sort-checkbox .sort-option .option-active{
+    background-color: #E8E8E8;
+    /* cursor: pointer; */
+}

@@ -1,0 +1,33 @@
+/* #right-bar-form {
+    border: 1px solid #E8E8E8;
+    border-radius: 5px;
+    padding: 12px 16px;
+} */
+
+#right-bar-form label:first-of-type {
+    margin-bottom: 8px;
+}
+
+
+#right-bar-form .btn-div{
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+#right-bar-form button{
+    padding: 8px 13px;
+    border: 1px solid #E8E8E8;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+#right-bar-form .cancel-btn{
+    /* background-color: #FFFFFF; */
+}
+#right-bar-form .save-btn{
+    background-color: #E64B16;
+    color: white;
+    margin-left: 8px;
+}

@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './TableWithPagination.css'
 import { MDBDataTable } from 'mdbreact';
 import 'mdbreact/dist/css/mdb.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { MDBTooltip } from 'mdb-react-ui-kit';
+import structuredClone from '@ungap/structured-clone';
 
 
 export default function TableWithPagination(props) {
+
+// useEffect(()=>{
+//   console.log(props.data,'-----------')
+// },[props.data])
 
   if (props.data) {
     if (props.data.columns) {
@@ -24,6 +29,8 @@ export default function TableWithPagination(props) {
       <div className=' table-with-pagination h-100 w-100'>
         <div className='h-100  w-100'>
           <MDBDataTable
+
+            style = {props.style}
             noBottomColumns={true}
             order='disabled'
             bordered
@@ -31,7 +38,7 @@ export default function TableWithPagination(props) {
             searching={false}  
             paging={false}     
 
-            data={props.data}
+            data={props.changeInTableData?props.changeInTableData(structuredClone(props.data)):props.data}
 
 
           />

@@ -1,0 +1,29 @@
+#login-page{
+    min-width: 100vw;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+}
+#login-page form{
+    width: 500px;
+    max-width: 100vw;
+    padding: 15px;
+}
+#login-page button{
+    background-color: #E64B16;
+    padding: 8px 13px;
+    color: white;
+    border-radius: 5px;
+
+}
+
+#login-page span{
+    position: absolute;
+    right: 35px;
+    top: 41px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#login-page .ti-eye-off{
+    cursor: pointer;
+}

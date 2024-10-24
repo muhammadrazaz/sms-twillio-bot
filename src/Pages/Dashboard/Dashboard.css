@@ -7,9 +7,31 @@
     border: 0;
     box-shadow: 0px 4px 74px 0px rgba(208, 208, 208, 0.2509803922);
     color: inherit;
+    
 }
+
 .dashboard-card-header{
     /* height: 41px; */
     padding: 16px 16px 0px 16px;
     background-color: transparent;
 }
+.table-card{
+    overflow-x: auto;
+}
+
+.first-row-card .dashboard-card-body, .second-row-card .dashboard-card-body{
+    height: 340px;
+}
+
+.third-row-card .dashboard-card-body{
+    height: 200px;
+}
+
+
+
+
+
+
+
+
+

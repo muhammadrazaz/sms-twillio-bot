@@ -1,0 +1,49 @@
+.export-comp label{
+    padding: 9px 15px;
+    border: 1px solid #E8E8E8;
+    border-radius: 5px;
+    width: fit-content;
+    position: relative;
+    cursor: pointer;
+}
+
+.export-comp label i{
+    font-size: 14px;
+}
+.export-comp label .drop-icon{
+    transition: all 1s ease;
+}
+
+.export-comp input[id="export-checkbox"]:checked + label  .drop-icon{
+    transform: rotate(180deg);
+}
+
+.export-comp .export-option{
+    /* min-width: 170px; */
+    width: fit-content;
+    padding: 10px;
+    background: #FFF;
+    box-shadow: 0 5px 10px rgba(30, 32, 37, 0.12);
+    border: 1px solid #E8E8E8;
+    position: absolute;
+    inset: 0px 0px auto auto;
+    margin: 0px;
+    transform: translate(0px, 45px);
+    z-index: 2;
+    border-radius: 5px;
+    display: none;
+}
+.export-comp input[id="export-checkbox"]:checked + label .export-option{
+    display: block;
+}
+.export-comp .export-option .option{
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    text-decoration: none;
+   
+}
+.export-comp .export-option .option:hover{
+    background-color: #E8E8E8;
+    text-decoration: none;
+}

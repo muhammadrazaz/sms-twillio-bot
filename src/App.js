@@ -1,11 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
-import Dashboard from './Pages/Dashboard/Dashboard';
-import BasePage from './Pages/BasePage/BasePage';
+import './App.css'
+import AuthProvider from './Provider/AuthProvider';
+import Routes from './Routes/index';
+import RightBarProvider from './Context/RightBarContext';
+import MultiSelectProvider from './Context/MultiSelectProvider';
 function App() {
   return (
 
-     <Dashboard></Dashboard>
+    <AuthProvider>
+      <RightBarProvider>
+        <MultiSelectProvider>
+        <Routes />
+        </MultiSelectProvider>
+      </RightBarProvider>
+      
+    </AuthProvider>
 
   );
 }
