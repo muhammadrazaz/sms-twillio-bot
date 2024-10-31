@@ -57,6 +57,7 @@ export default function Dashboard() {
       })
       .catch(error => {
         console.log(error)
+        decreaseApiCounter()
       })
   }
 
