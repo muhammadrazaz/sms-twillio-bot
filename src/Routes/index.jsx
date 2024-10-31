@@ -51,7 +51,7 @@ const Routes = () => {
         element: (
           <ProtectedRoute
 
-            requiredRole="admin"
+            requiredRole={["admin",'agent']}
           >
             <Dashboard />
           </ProtectedRoute>
@@ -63,7 +63,7 @@ const Routes = () => {
         element: (
           <ProtectedRoute
 
-            requiredRole="admin"
+            requiredRole={["admin",'agent']}
           >
             <Leads />
           </ProtectedRoute>
@@ -75,7 +75,7 @@ const Routes = () => {
         element: (
           <ProtectedRoute
 
-            requiredRole="admin"
+            requiredRole={["admin",'agent']}
           >
             <Shipping />
           </ProtectedRoute>
@@ -86,7 +86,7 @@ const Routes = () => {
         element: (
           <ProtectedRoute
 
-            requiredRole="admin"
+            requiredRole={["admin"]}
           >
             <Agents />
           </ProtectedRoute>
@@ -98,7 +98,7 @@ const Routes = () => {
         element: (
           <ProtectedRoute
 
-            requiredRole="admin"
+            requiredRole={["admin",'agent']}
           >
             <Task />
           </ProtectedRoute>

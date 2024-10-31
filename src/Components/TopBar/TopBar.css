@@ -12,6 +12,10 @@
     font-size: 18px;
 }
 
+.menu{
+    display: none;
+}
+
 #notification-counter {
     position: absolute;
     top: 3px;
@@ -87,7 +91,15 @@
 .notification-div .notification:last-child {
     border: none;
 }
-
+.notification .unread{
+    display: inline-block;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background-color: green;
+    margin-right: 5px;
+    transform: translateY(-50%);
+}
 .notification .title,
 .notification .description {
     color: #6F6F6F;
@@ -134,9 +146,15 @@
 
 .profile-form-grid{
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two equal columns */
+    grid-template-columns: repeat(1, 1fr); /* Two equal columns */
     gap: 15px 30px; /* Optional: Add spacing between grid items */
     padding: 16px;
     border: 1px solid #E8E8E8;
     border-radius: 5px;
 }
+
+@media (max-width: 768px) {
+    .menu {
+      display: block;
+    }
+  }

@@ -1,18 +1,25 @@
 import './App.css'
 import AuthProvider from './Provider/AuthProvider';
+import RightBarProvider from './Provider/RightBarProvider';
+import ApiProvider from './Provider/ApiProvider';
 import Routes from './Routes/index';
-import RightBarProvider from './Context/RightBarContext';
+
+
 import MultiSelectProvider from './Context/MultiSelectProvider';
 function App() {
   return (
 
     <AuthProvider>
+      
+      <ApiProvider>
       <RightBarProvider>
         <MultiSelectProvider>
-        <Routes />
+          <Routes />
         </MultiSelectProvider>
       </RightBarProvider>
-      
+      </ApiProvider>
+
+
     </AuthProvider>
 
   );

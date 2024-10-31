@@ -1,21 +1,13 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import './RightBarForm.css'
-import { RightBarContext } from '../../Context/RightBarContext'
+import { useRightBar } from '../../Provider/RightBarProvider'
 export default function RightBarForm(props) {
-  const {setRightBarCheckBox,setRightBarChildren,setRightBarTitle} = useContext(RightBarContext)
-
-
-  useEffect(()=>{
-    console.log('---------------------')
-  },[props.formData])
-  
-  const closeRightBar = () => {
-    setRightBarCheckBox(false)
-    setRightBarChildren(null)
-    setRightBarTitle()
-  }
+  const {setRightBarCheckbox} = useRightBar()
+    const closeRightBar = () =>{
+      setRightBarCheckbox(false)
+      }
   return (
-    <form id='right-bar-form' onSubmit={(e)=>{e.preventDefault();props.onSubmit(props.formData)}}>
+    <form id='right-bar-form' onSubmit={props.onSubmit}>
       {props.children}
       <div className="btn-div">
       
@@ -28,7 +20,7 @@ export default function RightBarForm(props) {
           </button>
         
       </div>
-      <button onClick={()=>{test('test')}} type='button'>test</button>
+
        </form>
   )
 }

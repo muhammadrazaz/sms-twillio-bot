@@ -2,12 +2,12 @@
 import React from 'react';
 import Chart from 'react-apexcharts';
 
-const LineChart = () => {
+const LineChart = (props) => {
   const chartData = {
     series: [
       {
-        name: 'Sales',
-        data: [30, 40, 35, 50, 49, 60, 70, 91, 25],
+        name: 'Leads',
+        data: props.data.data,
         fill: {
             opacity: 0.2, // Set the opacity for the shaded area
           },
@@ -36,17 +36,7 @@ const LineChart = () => {
         opacity: 0.2, // Set the opacity for the shaded area
       },
       xaxis: {
-        categories: [
-          'Jan',
-          'Feb',
-          'Mar',
-          'Apr',
-          'May',
-          'Jun',
-          'Jul',
-          'Aug',
-          'Sep',
-        ],
+        categories: props.data.label,
       },
       tooltip: {
         shared: true,

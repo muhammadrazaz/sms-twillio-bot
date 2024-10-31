@@ -9,17 +9,28 @@ export default function CustomDatePicker(props) {
   const Ranges = [
     {
       label: 'today',
-      value: [endOfDay(new Date()), endOfDay(new Date())]
+      value: [new Date(), new Date()]
     },
     {
       label: 'yesterday',
-      value: [endOfDay(addDays(new Date(), -1)), endOfDay(addDays(new Date(), -1))]
+      value: [subDays(new Date(), 1), subDays(new Date(),1)]
     },
     {
       label: 'last7Days',
-      value: [endOfDay(subDays(new Date(), 6)), endOfDay(new Date())]
-    }
+      value: [subDays(new Date(),7), new Date()]
+    },
+    // {
+    //   label: 'last10Days',
+    //   value: [startOfDay(subDays(new Date(),10)), endOfDay(new Date())]
+    // }
   ];
+
+  const handleDateChange = (range) => {
+   
+    
+    const adjustedDates = [startOfDay(addDays(range[0],1)), endOfDay(range[1],-1)]
+    props.setDates(adjustedDates);
+  };
 
   return (
     <div className="field">
@@ -29,7 +40,7 @@ export default function CustomDatePicker(props) {
       format="dd-MM-yyyy"
       // defaultCalendarValue={[new Date(), new Date()]}
       value={props.dates}
-      onChange={props.setDates}
+      onChange={handleDateChange}
       placement="auto"
       ranges={Ranges}
       cleanable={false}

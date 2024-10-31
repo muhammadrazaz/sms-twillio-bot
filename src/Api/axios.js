@@ -14,7 +14,7 @@ const getHeaders = () => {
 };
 export default axios.create({
     // const token = localStorage.getItem("token")
-    baseURL: 'http://127.0.0.1:8000/api',
+    baseURL: 'http://167.172.151.37:8002/api',
 
     headers: getHeaders(),
 

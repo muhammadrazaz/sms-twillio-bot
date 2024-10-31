@@ -1,19 +1,28 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import './Task.css'
 import BasePage from '../BasePage/BasePage'
 import TableSearchSortFilter from '../../Components/TableSearchSortFilter/TableSearchSortFilter'
 
-import { setDate, subDays } from 'date-fns'
+import { set, setDate, subDays } from 'date-fns'
 import TableAction from '../../Components/TableAction/TableAction'
-import { RightBarContext } from '../../Context/RightBarContext'
+import RightBar from '../../Components/RightBar/RightBar'
 import RightBarForm from '../../Components/RightBarForm/RightBarForm'
 import AddButton from '../../Components/AddButton/AddButton'
+import axios from '../../Api/axios'
+import { useRightBar } from '../../Provider/RightBarProvider'
+import { useApi } from '../../Provider/ApiProvider'
 export default function Task() {
     const [dates, setDates] = useState([subDays(new Date(), 30), new Date()])
+    const {rightBarCheckbox,setRightBarCheckbox} = useRightBar()
+    const {increaseApiCounter,decreaseApiCounter} = useApi()
 
-    const { setRightBarCheckBox, setRightBarChildren, setRightBarTitle } = useContext(RightBarContext)
     const [newTaskData, setNewTaskData] = useState({})
     const [editTaskData, setEditTaskData] = useState({})
+    const [isAddFormShow, setIsAddFormShow] = useState(false)
+    const [isEditFormShow,setIsEditFormShow] = useState(false)
+    const [errors,setErrors] = useState({})
+
+    const [filterOption, setFilterOption] = useState({})
 
 
 
@@ -56,56 +65,20 @@ export default function Task() {
 
 
         ],
-        rows: [
-            {
 
-                title: 'California',
-                category: '-1002271875770',
-                start_date: 'Lingo.000',
-                start_time: '-1002271875770',
-                description: 'borismeh65@gmail.com',
-                priority: 'sterfri',
-                status: 'pending'
-
-            },
-            {
-
-                title: 'California',
-                category: '-1002271875770',
-                start_date: 'Lingo.000',
-                start_time: '-1002271875770',
-                description: 'borismeh65@gmail.com',
-                priority: 'sterfri',
-                status: 'pending'
-
-            },
-            {
-
-                title: 'California',
-                category: '-1002271875770',
-                start_date: 'Lingo.000',
-                start_time: '-1002271875770',
-                description: 'borismeh65@gmail.com',
-                priority: 'sterfri',
-                status: 'pending'
-
-            },
-            {
-
-                title: 'California',
-                category: '-1002271875770',
-                start_date: 'Lingo.000',
-                start_time: '-1002271875770',
-                description: 'borismeh65@gmail.com',
-                priority: 'sterfri',
-                status: 'pending'
-
-
-            },
-        ]
     })
 
-    const handleNewAgentChange = (e) => {
+    useEffect(()=>{
+        getTaskApi()
+        
+    },[dates])
+
+    useEffect(()=>{
+        getFilterOptionApi()
+    },[])
+
+   
+    const handleNewTaskChange = (e) => {
         const { name, value } = e.target
         setNewTaskData(prevState => ({
             ...prevState,
@@ -113,7 +86,7 @@ export default function Task() {
         }))
     }
 
-    const handleEditTaskData = (e) => {
+    const handleEditTaskChange = (e) => {
         const { name, value } = e.target
         setEditTaskData(prevState => ({
             ...prevState,
@@ -121,109 +94,108 @@ export default function Task() {
         }))
     }
 
-
-    function taskForm(data, handleChangeData) {
-
-        return <div className="task-form-div">
-            <div className="row">
-                <div className="form-group">
-                    <label for="title" className="form-label regular-font">Title<span className="text-danger">*</span></label>
-                    <input type="text" name='title' className="form-control" id="channel-id" value={data['title']} onChange={handleChangeData} required />
-                    <div className="valid-feedback">
-
-                    </div>
-                </div>
-            </div>
-
-
-            <div className="form-group">
-                <label for="category" className="form-label regular-font">Category <span className="text-danger">*</span></label>
-                <select name="category" id="category" className='form-control w-100' value={data['category']} onChange={handleChangeData}>
-                    <option value="">Email</option>
-                    <option value="">Call</option>
-                </select>
-
-                <div className="valid-feedback">
-
-                </div>
-            </div>
-
-            <div className="row">
-                <div className="col-md-6">
-                    <div className="form-group">
-                        <label for="start_date" className="form-label regular-font">Start Date <span className="text-danger">*</span></label>
-                        <input type="date" name='start_date' className="form-control" id="start_date" value={data['start_date']} onChange={handleChangeData} />
-                        <div className="valid-feedback">
-
-                        </div>
-                    </div>
-                </div>
-                <div className="col-md-6">
-                    <div className="form-group">
-                        <label for="start_time" className="form-label regular-font">Start Time </label>
-                        <input type="text" name='start_time' className="form-control" id="start_time" value={data['start_time']} onChange={handleChangeData} />
-                        <div className="valid-feedback">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-
-
-            <div className="form-group">
-                <label for="status" className="form-label regular-font">Status <span className="text-danger" onChange={handleChangeData}>*</span></label>
-                <select name="status" id="status" className='form-control w-100' value={data['status']} onChange={handleChangeData}>
-                    <option value="">Pending</option>
-                    <option value="">Started</option>
-                </select>
-
-                <div className="valid-feedback">
-
-                </div>
-            </div>
-
-            <div className="form-group">
-                <label for="description" className="form-label regular-font">Description</label>
-                <textarea name="description" className="form-control" id="description" value={data['description']} onChange={handleChangeData} rows={12}></textarea>
-
-                <div className="valid-feedback">
-
-                </div>
-            </div>
-
-
-        </div>
+    const editTask = (e) => {
+        setEditTaskData(JSON.parse(e.target.value));
+        setRightBarCheckbox(true);
+        setIsEditFormShow(true)
     }
 
 
-    const addTaskForm = () => {
 
-        const form = <RightBarForm>
-            {taskForm(newTaskData, handleNewAgentChange)}
-        </RightBarForm>
-        setRightBarTitle("Add New Task")
-        setRightBarCheckBox(true)
-        setRightBarChildren(form)
+
+
+
+
+    const AddTask = <AddButton title="Add Task" onClick={() => { setRightBarCheckbox(true);setIsAddFormShow(true) }}></AddButton>
+
+
+    const getTaskApi = () =>{
+        console.log(dates,'dates')
+        increaseApiCounter()
+        axios.get('task/',{
+            params :{
+                dates : dates
+            }
+        })
+        .then(response=>{
+            console.log(response)
+            setTableData(prevState=>({
+                ...prevState,
+                'rows':response.data
+            }))
+            decreaseApiCounter()
+        }).catch(error=>{
+            console.log(error)
+            decreaseApiCounter()
+        })
     }
-    const editTaskForm = (e) => {
-        const data = JSON.parse(e.target.value)
-        setEditTaskData(data)
 
-        const form = <RightBarForm>
-            {taskForm(editTaskData, handleEditTaskData)}
-        </RightBarForm>
-        setRightBarTitle("Edit Task Data")
-        setRightBarCheckBox(true)
-        setRightBarChildren(form)
-
-
-
+    const getFilterOptionApi = () =>{
+        axios.get('task/fitler-options')
+        .then(response =>{
+            console.log(response)
+            setFilterOption(response.data)
+        })
+        .catch(error=>{
+            console.log(error)
+        })
     }
 
-    const AddTask = <AddButton title="Add Task" onClick={addTaskForm}></AddButton>
+    const addTaskApi = (e) => {
+        e.preventDefault()
+        increaseApiCounter()
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const data = newTaskData
+        data['user_timezone'] = timezone
+
+       
+        
+        axios.post('task/',data)
+        .then(response=>{
+            console.log(response)
+            decreaseApiCounter()
+            getTaskApi()
+            setRightBarCheckbox(false)
+            setNewTaskData({})
+            setErrors({})
+        }).catch(error=>{
+            if(error.response.status===400){
+                setErrors(error.response.data)
+            }
+            else{
+                setErrors({})
+            }
+            console.log(error)
+            decreaseApiCounter()
+            setRightBarCheckbox(false)
+        })
+    }
+
+    const editTaskApi = (e) => {
+        e.preventDefault()
+        increaseApiCounter()
+        console.log(editTaskData)
+       
+        
+        axios.put('task/'+editTaskData.id+'/',editTaskData)
+        .then(response=>{
+            console.log(response)
+            decreaseApiCounter()
+            getTaskApi()
+            setRightBarCheckbox(false)
+            setErrors({})
+        }).catch(error=>{
+            if(error.response.status===400){
+                setErrors(error.response.data)
+            }
+            else{
+                setErrors({})
+            }
+            console.log(error)
+            decreaseApiCounter()
+            setRightBarCheckbox(false)
+        })
+    }
 
 
 
@@ -241,7 +213,7 @@ export default function Task() {
             data.rows.map((row, index) => {
                 row['action'] = <TableAction index={index}>
                     <div>
-                        <button value={JSON.stringify(row)} onClick={editTaskForm} className='edit-btn w-100 noto-sans-font'><i className="ti ti-edit text-primary me-2"></i>Edit</button>
+                        <button value={JSON.stringify(row)} onClick={editTask} className='edit-btn w-100 noto-sans-font'><i className="ti ti-edit text-primary me-2"></i>Edit</button>
                     </div>
                 </TableAction>
             })
@@ -253,9 +225,105 @@ export default function Task() {
             <p className='noto-sans-font medium-font regular-font mb-3'>Leads 0</p>
 
 
-            <TableSearchSortFilter data={tableData} dates={dates} setDates={setDates} changeInTableData={changeInTableData} AddButton={AddTask} />
-
+            <TableSearchSortFilter data={tableData} dates={dates} setDates={setDates} changeInTableData={changeInTableData} AddButton={AddTask} filterOption={filterOption} reportName = "taskReport.csv"/>
+            {isAddFormShow && <RightBar setIsFormShow={setIsAddFormShow} rightBarTitle="Add New Task" children={<TaskForm data={newTaskData} handleChangeData={handleNewTaskChange} onSubmit={addTaskApi} errors={errors} />} />}
+            {isEditFormShow && <RightBar setIsFormShow={setIsEditFormShow} rightBarTitle="Edit Task" children={<TaskForm data={editTaskData} handleChangeData={handleEditTaskChange} onSubmit={editTaskApi} errors={errors} />} />}
 
         </BasePage>
+    )
+}
+
+
+export const TaskForm = (props) => {
+    const rightBarChildren = <div className="task-form-div">
+        <div className="row">
+            <div className="form-group">
+                <label htmlFor="title" className="form-label regular-font">Title<span className="text-danger">*</span></label>
+                <input type="text" name='title' className={"form-control "+(props.errors.title?'is-invalid':'')} id="channel-id" value={props.data['title']} onChange={props.handleChangeData}  />
+                <div className="invalid-feedback">
+                    {props.errors.title}
+                </div>
+            </div>
+        </div>
+
+
+        <div className="form-group">
+            <label htmlFor="category" className="form-label regular-font">Category <span className="text-danger">*</span></label>
+            <select name="category" id="category" className={'form-control w-100 ' + (props.errors.category?'is-invalid':'') } value={props.data['category']} onChange={props.handleChangeData}>
+                <option value=""></option>
+                <option value="email">Email</option>
+                <option value="call">Call</option>
+            </select>
+
+            <div className="invalid-feedback">
+                    {props.errors.category}
+            </div>
+        </div>
+
+        <div className="row">
+            <div className="col-md-6">
+                <div className="form-group">
+                    <label htmlFor="start_date" className="form-label regular-font">Start Date <span className="text-danger">*</span></label>
+                    <input type="date" name='start_date' className={"form-control "+(props.errors.start_date?'is-invalid':'')} id="start_date" value={props.data['start_date']} onChange={props.handleChangeData} />
+                    <div className="invalid-feedback">
+                    {props.errors.start_date}
+                    </div>
+                </div>
+            </div>
+            <div className="col-md-6">
+                <div className="form-group">
+                    <label htmlFor="start_time" className="form-label regular-font">Start Time </label>
+                    <input type="time" name='start_time' className={"form-control "+(props.errors.start_time?'is-invalid':'')} id="start_time" value={props.data['start_time']} onChange={props.handleChangeData} />
+                    <div className="invalid-feedback">
+                    {props.errors.start_time}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div className="form-group">
+            <label htmlFor="status" className="form-label regular-font">Status <span className="text-danger" >*</span></label>
+            <select name="status" id="status" className={'form-control w-100 '+ (props.errors.status?'is-invalid':'')} value={props.data['status']} onChange={props.handleChangeData}>
+                <option value=""></option>
+                <option value="pending">Pending</option>
+                <option value="started">Started</option>
+            </select>
+
+            <div className="invalid-feedback">
+                    {props.errors.status}
+            </div>
+        </div>
+
+        <div className="form-group">
+            <label htmlFor="priority" className="form-label regular-font">Priority <span className="text-danger" >*</span></label>
+            <select name="priority" id="priority" className={'form-control w-100 '+ (props.errors.priority?'is-invalid':'')} value={props.data['priority']} onChange={props.handleChangeData}>
+                <option value=""></option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+            </select>
+
+            <div className="invalid-feedback">
+                    {props.errors.priority}
+            </div>
+        </div>
+
+        <div className="form-group">
+            <label htmlFor="description" className="form-label regular-font">Description</label>
+            <textarea name="description" className={"form-control "+(props.errors.description?'is-invalid':'')} id="description" value={props.data['description']} onChange={props.handleChangeData} rows={12}></textarea>
+
+            <div className="invalid-feedback">
+                    {props.errors.description}
+            </div>
+        </div>
+
+
+    </div>
+    return (
+        <RightBarForm onSubmit={props.onSubmit} children={rightBarChildren} />
     )
 }

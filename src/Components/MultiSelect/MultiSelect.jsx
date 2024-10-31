@@ -2,9 +2,25 @@ import React, { useEffect, useRef, useState } from 'react'
 import './MultiSelect.css'
 export default function MultiSelect(props) {
 
-    const [selectedOptions, setSelectedOptions] = useState(props.stateData && props.stateData[props.name] || [])
+    const [selectedOptions, setSelectedOptions] = useState([])
     const [isSelect, setIsSelect] = useState(false)
     const multiSelectRef = useRef(null)
+
+
+    useEffect(()=>{
+        if(props.stateData){
+            if(props.stateData[props.name]){
+                if(Array.isArray(props.stateData[props.name])){
+                    setSelectedOptions(props.stateData[props.name])
+                }
+                else{
+                    setSelectedOptions(props.stateData[props.name].replace(' ','').split(','))
+                }
+            }
+            
+        }
+        // props.stateData && props.stateData[props.name] || []
+    },[])
 
 
     useEffect(() => {
@@ -52,7 +68,7 @@ export default function MultiSelect(props) {
     }
     return (
 
-        <div className="multi-select-div" ref={multiSelectRef} onClick={() => { setIsSelect(true) }}>
+        <div className={"multi-select-div "+props.className} ref={multiSelectRef} onClick={() => { setIsSelect(true) }}>
                 <input type="checkbox" name="multi-select-checkbox" className='multi-select-checkbox d-none' checked={isSelect} />
             <div className='d-flex selected-options'>
                 {/* <div className='selected-option-div'> */}
@@ -65,15 +81,16 @@ export default function MultiSelect(props) {
                 {/* </div> */}
             </div>
 
-            {/* <div className='multi-select-optios'>
-                {props.options.map((value, index) => {
+            <div className='multi-select-optios'>
+                
+                {props.options && props.options.map((value, index) => {
                     return <div className='d-flex align-items-center sm-font regular-font option' key={index}>
                         <input type="checkbox" name="" id={"option-" + index} value={value} checked={selectedOptions.includes(value) ? true : false} onChange={optionChange} />
                         <label htmlFor={"option-" + index} className='ms-2'>{value}</label>
                     </div>
                 })}
 
-            </div> */}
+            </div>
         </div>
 
     )

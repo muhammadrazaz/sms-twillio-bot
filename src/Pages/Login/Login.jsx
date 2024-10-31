@@ -39,7 +39,7 @@ export default function Login() {
             console.log(response)
             const data = response.data
             setToken(data.access_token)
-            setUserDetail({'first_name':data.first_name,'last_name':data.last_name,'role':data.role})
+            setUserDetail({'first_name':data.first_name,'last_name':data.last_name,email:data.email,'role':data.role})
             setLoader(false)
         }).catch(error =>{
             console.log(error)
@@ -69,10 +69,10 @@ export default function Login() {
                         <div className="form-group position-relative">
                            
                             <label htmlFor="username" className="form-label regular-font">Username</label>
-                            <input type="text" name='username' className={"form-control "+(errors.username?'is-invalid':'')} id="useraname"   onChange={handleLoginDataChange}/>
+                            <input type="text" name='username' className={"form-control "+(errors.username||errors.error?'is-invalid':'')} id="useraname"   onChange={handleLoginDataChange}/>
                             <span className="ti ti-user-check"></span>
                             <div className="invalid-feedback">
-                                {errors.username}
+                                {errors.username||errors.error}
                             </div>
                         </div>
                     </div>

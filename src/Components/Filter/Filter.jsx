@@ -79,7 +79,7 @@ export default function Filter(props) {
             return <div key={index} className='mb-4'>
 
               <input type="radio" name='filter-option-selection' id={key} className='d-none' checked={selectedOption === key} onChange={()=>{}} onClick={() => handleOptionClick(key)} />
-              <label htmlFor={key} className='text-capitalize noto-sans-font sm-font semibold-font p-0' style={{ border: 'none' }}> <i className="ti ti-chevron-right ms-1 d-inline-block me-2"></i>{key}</label>
+              <label htmlFor={key} className='text-capitalize noto-sans-font sm-font semibold-font p-0' style={{ border: 'none' }}> <i className="ti ti-chevron-right ms-1 d-inline-block me-2"></i>{key.replace('_',' ')}</label>
               <div className="sub-options">
 
                 {props.filterOption[key].map((value, secondIndex) => {

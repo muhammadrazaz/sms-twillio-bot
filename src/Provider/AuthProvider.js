@@ -33,12 +33,13 @@ const AuthProvider = ({ children }) => {
     }
 
     if(userDetail){
+      
       localStorage.setItem('user',JSON.stringify(userDetail))
     }
     else{
       localStorage.removeItem('user')
     }
-  }, [token]);
+  }, [token,userDetail]);
 
 
 

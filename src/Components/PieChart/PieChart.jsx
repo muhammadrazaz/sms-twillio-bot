@@ -2,14 +2,15 @@
 import React from 'react';
 import Chart from 'react-apexcharts';
 
-const PieChart = () => {
+const PieChart = (props) => {
+  console.log(props.data)
   const chartData = {
-    series: [44, 55, 41, 17, 15],
+    series: props.data.data,
     options: {
       chart: {
         type: 'pie',
       },
-      labels: ['Apples', 'Oranges', 'Bananas', 'Berries', 'Grapes'],
+      labels: props.data.label,
       colors: ['#FF4560', '#008FFB', '#00E396', '#775DD0', '#FEB019'],
       legend: {
         position: 'bottom',

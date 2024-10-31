@@ -8,14 +8,18 @@ import TableWithPagination from '../TableWithPagination/TableWithPagination'
 import RightBar from '../RightBar/RightBar'
 export default function TableSearchSortFilter(props) {
     const [search, setSearch] = useState('')
-    const [processedData, setProcessedData] = useState({...props.data})
+    const [processedData, setProcessedData] = useState({})
     const [selectedFilterOption,setSelectedFilterOption] = useState({})
     const [isFilterChange,setIsFilterChange] = useState(false)
     const [sortBy,setSortBy] = useState('')
-    const [filterOption, setFilterOption] = useState({
-        country: ['UK', 'USA', 'PK'],
-        states: ['California', 'State2', 'State3','state4','state5','state6','state-7']
-      })
+    // const [filterOption, setFilterOption] = useState({
+    //     country: ['UK', 'USA', 'PK'],
+    //     states: ['California', 'State2', 'State3','state4','state5','state6','state-7']
+    //   })
+
+      useEffect(()=>{
+        setProcessedData(props.data)
+      },[props.data])
     
 
 
@@ -68,7 +72,8 @@ export default function TableSearchSortFilter(props) {
                
                 if (row[column]) {
                     return filterTerms[column].some(term =>
-                        String(row[column]).toLowerCase().includes(term.toLowerCase())
+                        
+                        String(row[column]).toLowerCase().includes(',')?String(row[column]).toLowerCase().includes(term.toLowerCase()):String(row[column]).toLowerCase().replace('_',' ') === (term.toLowerCase())
                     );
                 }
                 return false;
@@ -96,10 +101,10 @@ export default function TableSearchSortFilter(props) {
     return (
         <div className='table-data bg-white position-relative' style={{ borderRadius: "5px" }}>
             <div className="row p-3 top-row" style={{ borderBottom: '1px solid #E8E8E8' }}>
-                <div className="col-md-6">
+                <div className="col-md-6 my-2">
                     <Search search={search} setSearch={setSearch} />
                 </div>
-                <div className="col-md-6" style={{ textAlign: 'end' }}>
+                <div className="col-md-6 my-2" style={{ textAlign: 'end' }}>
                     <div className="d-flex align-items-center justify-content-end">
                         <Export data={processedData}/>
                         {props.AddButton}
@@ -109,14 +114,14 @@ export default function TableSearchSortFilter(props) {
             <div className="p-3">
                 <div className="row mb-4">
                     <div className="col">
-                        <div className='d-flex align-items-center justify-content-between'>
+                        <div className='d-flex align-items-center flex-wrap gap-2 justify-content-between'>
                             <div className='d-flex align-items-center justify-content-start row-gap-2'>
 
                                 <Sort sortBy={sortBy} setSortBy={setSortBy}/>
                                 <CustomDatePicker dates={props.dates} setDates={props.setDates} />
                             </div>
 
-                            <Filter filterOption={filterOption} selectedFilterOption ={selectedFilterOption} setSelectedFilterOption={setSelectedFilterOption} isFilterChange={isFilterChange} setIsFilterChange={setIsFilterChange}/>
+                            <Filter filterOption={props.filterOption} selectedFilterOption ={selectedFilterOption} setSelectedFilterOption={setSelectedFilterOption} isFilterChange={isFilterChange} setIsFilterChange={setIsFilterChange}/>
                         </div>
                     </div>
                 </div>

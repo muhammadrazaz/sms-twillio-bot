@@ -1,12 +1,12 @@
 import React from 'react';
 import Chart from 'react-apexcharts';
 
-export default function BarChart() {
+export default function BarChart(props) {
     const chartData = {
         series: [
           {
-            name: 'Sales',
-            data: [30, 40, 35],
+            name: props.name,
+            data: props.data.data,
           },
         ],
         options: {
@@ -26,11 +26,7 @@ export default function BarChart() {
             enabled: true,
           },
           xaxis: {
-            categories: [
-              'Product A',
-              'Product B',
-              'Product C',
-            ],
+            categories: props.data.label,
           },
          
           tooltip: {

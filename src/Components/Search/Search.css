@@ -4,7 +4,7 @@
     position: relative;
 }
 .search-div input{
-    padding: 8px 15px 8px 35px;
+    padding: 8px 15px 8px 35px !important;
     height:42px;
     box-shadow: none !important;
 }
